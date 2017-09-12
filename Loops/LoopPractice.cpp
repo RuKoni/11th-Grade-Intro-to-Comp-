@@ -4,6 +4,7 @@
 /* Practice Program using the three loop types. While, For, Do.
 	All statements will loop if the input is Y or y.
 	For and Do statements loop up to a maximum of 10 times.
+*/
 
 #include "stdafx.h"
 #include <iostream>
