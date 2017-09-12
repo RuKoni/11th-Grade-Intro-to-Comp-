@@ -1,6 +1,10 @@
 // LoopPractice.cpp : Defines the entry point for the console application.
 // Nichol He
 
+/* Practice Program using the three loop types. While, For, Do.
+	All statements will loop if the input is Y or y.
+	For and Do statements loop up to a maximum of 10 times.
+
 #include "stdafx.h"
 #include <iostream>
 
@@ -13,34 +17,40 @@ int main()
 	char loop = 'y';
 	char type1, type2;
 	int b = 1;
-		// Output before While Statement
+	
+	//Output before While Statement
 	cout << "This is a program to test out do, while, and for loops." << endl;
 		cout << endl << endl;
 	cout << "First is while loops." << endl;
 		cout << endl << endl;
-		//While statement
+		
+	//While statement
 		while ( repeat == 'y' || repeat == 'Y') {
 			cout << "This stamement will loop if you enter y." << endl;
 				cin >> repeat;
 		}
-		// Output before For Statement
+		
+	// Output before For Statement
 	cout << endl  << endl;
 	cout << "Next is for loops. Press any key to continue." << endl;
 		cin >> type1;
 	cout << endl << endl;
 		
 	repeat = 'y';	// *** Reset varialble repeat = 'y' after While Statement ***
-		// For Statement
+	
+	// For Statement
 		for (int a = 1; (repeat == 'y' || repeat == 'Y') && ( a < 11 ); a++) {
 			cout << "This statement will loop if you enter y. But it will only loop 10 times. You are at loop #" << a << endl;
 				cin >> repeat;
 		}
-		// Output before Do Statement
+		
+	// Output before Do Statement
 	cout << endl << endl;
 	cout << "Lastly, do statements. Press any key to continue." << endl;
 		cin >> type2;
 	cout << endl << endl;
-		//Do Statement 
+	
+	//Do Statement 
 		do {
 			cout << "This statement will also loop if you press y. But only 10 times. You are on loop #" << b << endl;
 				cin >> repeat;
