@@ -1,4 +1,3 @@
-// TextandMonsters.cpp : Defines the entry point for the console application.
 //Nichol He
 
 #include "stdafx.h"
@@ -8,20 +7,21 @@
 #include <iomanip>
 
 using namespace std;
-void greenSlime ();
-void lavaSlime ();
-void mudSlime ();
-void goldenSlime ();
+void greenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void lavaSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void mudSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void goldenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
 
 int main() {
 
-	string gameStart, name, MenuSelect;
+	string gameStart, name, MenuSelect, action, cont;
 	int Hp, Mp, HpMax, MpMax, Lvl;
 	int Atk, Satk, Def, Sdef, Agi, Eva, Luck;
 
 	string Mname;
-	int Mlvl, MHp, MHpMax, MMp, MMpMax; 
+	int Mlvl, MHp, MHpMax, MMp, MMpMax;
 	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
+
 	int rng;
 
 	Hp = 10;
@@ -37,94 +37,166 @@ int main() {
 	Eva = 5;
 	Luck = 10;
 
-
 	cout << "Welcome to Text and Monsters! Would you like to play?" << endl;
 	cout << "\t Yes or No" << endl;
-		cin >> gameStart;
+	cin >> gameStart;
 	cout << endl;
 
 	if (gameStart == "yes" || gameStart == "Yes") {
 		cout << "Please enter your name" << endl;
 		cout << endl;
-			cin >> name;
+		cin >> name;
 		cout << endl << endl;
-			cout << "Welcome, " << name << endl;
+		cout << "Welcome, " << name << endl;
+		cout << endl << endl;
+
+		while (Lvl < 100) {
+			cout << "Lvl " << Lvl << " " << name << endl;
+			cout << "HP = (" << Hp << "/" << HpMax << ")" << endl;
+			cout << "MP = (" << Mp << "/" << MpMax << ")" << endl;
+			cout << endl << endl << endl << endl;
+			cout << "=======================================" << endl;
 			cout << endl << endl;
 
-			while (Lvl < 100) {
-					cout << "Lvl " << Lvl << " " << name << endl;
-					cout << "HP = (" << Hp << "/" << HpMax << ")" << endl;
-					cout << "MP = (" << Mp << "/" << MpMax << ")" << endl;
-					cout << endl << endl << endl << endl;
-					cout << "=======================================" << endl;
-					cout << endl << endl;
+			cout << "Battle" << endl;
+			cout << endl;
+			cin >> MenuSelect;
+			cout << endl;
 
-				cout << "Battle" << endl;
-				cout << endl;
-				cin >> MenuSelect;
-				cout << endl;
+			if (MenuSelect == "Battle" || MenuSelect == "battle") {
 
-					if (MenuSelect == "Battle" || MenuSelect == "battle") {
+				srand(time(NULL));
+				rng = rand() % 100;
+				MHp = 0;
 
-						srand(time(NULL));
-						rng = rand() % 100;
+				for (; MHp > 0 || Hp > 0;) {
 
-						if (rng == 1 || rng == 100 || rng == 50) {
-							cout << "You have encountered A Golden Slime" << endl;
-							cout << endl << endl;
-							int goldenSlime;
+					if (rng == 1 || rng == 100 || rng == 50) {
+						cout << "You have encountered A Golden Slime" << endl;
+						cout << endl << endl;
 
-							cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
-							cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
-							cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-							cout << endl << endl << endl;
-							cout << "===============================================" << endl;
+						goldenSlime(Mname, Mlvl, MHp, MHpMax, MMp, MMpMax, MAtk, MDef, MSatk, MSdef, MAgi, MEva);
+
+						cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
+						cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
+						cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
+						cout << endl << endl << endl;
+						cout << "===============================================" << endl;
+
+						cout << endl;
+						cout << "Attack" << endl;
+						cout << "Defend" << endl;
+							cin >> action;
+						cout << endl;
+
+						if (action == "Attack" || action == "attack") {
+
+							int dmg = ((Atk + Satk) - (MDef + MSdef)) * 1.5;
+							int Mdmg = ((MAtk + MSatk) - (Def + Sdef));
+
+							MHp = MHp - dmg;
+							Hp = Hp - Mdmg;
+							cout << "You attacked  " << Mname << "!" << endl;
+							cout << Mname << " took" << dmg << " damage!" << endl;
+							cout << endl;
+							cout << Mname << " counter attacked!" << endl;
+							cout << "You took " << Mdmg << " damage!" << endl;
+							cin >> cont;
 						}
+					}
 
-						else if (rng >= 10 && rng <= 20 || rng >= 80 && rng <= 90) {
-							cout << "You have encountered A Lava Slime" << endl;
-							cout << endl << endl;
-							int lavaSlime;
+					else if (rng >= 10 && rng <= 20 || rng >= 80 && rng <= 90) {
+						cout << "You have encountered A Lava Slime" << endl;
+						cout << endl << endl;
 
-							cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
-							cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
-							cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-							cout << endl << endl << endl;
-							cout << "===============================================" << endl;
+						lavaSlime(Mname, Mlvl, MHp, MHpMax, MMp, MMpMax, MAtk, MDef, MSatk, MSdef, MAgi, MEva);
+
+						cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
+						cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
+						cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
+						cout << endl << endl << endl;
+						cout << "===============================================" << endl;
+
+						if (action == "Attack" || action == "attack") {
+
+							int dmg = ((Atk + Satk) - (MDef + MSdef)) * 1.5;
+							int Mdmg = ((MAtk + MSatk) - (Def + Sdef));
+
+							MHp = MHp - dmg;
+							Hp = Hp - Mdmg;
+							cout << "You attacked  " << Mname << "!" << endl;
+							cout << Mname << " took" << dmg << " damage!" << endl;
+							cout << endl;
+							cout << Mname << " counter attacked!" << endl;
+							cout << "You took " << Mdmg << " damage!" << endl;
+							cin >> cont;
 						}
+					}
 
-						else if (rng >= 40 && rng <= 60) {
-							cout << "You have encountered A Mud Slime" << endl;
-							cout << endl << endl;
-							int mudSlime;
+					else if (rng >= 40 && rng <= 60) {
+						cout << "You have encountered A Mud Slime" << endl;
+						cout << endl << endl;
 
-							cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
-							cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
-							cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-							cout << endl << endl << endl;
-							cout << "===============================================" << endl;
+						mudSlime(Mname, Mlvl, MHp, MHpMax, MMp, MMpMax, MAtk, MDef, MSatk, MSdef, MAgi, MEva);
+
+						cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
+						cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
+						cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
+						cout << endl << endl << endl;
+						cout << "===============================================" << endl;
+
+						if (action == "Attack" || action == "attack") {
+
+							int dmg = ((Atk + Satk) - (MDef + MSdef)) * 1.5;
+							int Mdmg = ((MAtk + MSatk) - (Def + Sdef));
+
+							MHp = MHp - dmg;
+							Hp = Hp - Mdmg;
+							cout << "You attacked  " << Mname << "!" << endl;
+							cout << Mname << " took" << dmg << " damage!" << endl;
+							cout << endl;
+							cout << Mname << " counter attacked!" << endl;
+							cout << "You took " << Mdmg << " damage!" << endl;
+							cin >> cont;
 						}
-
-						else {
-							cout << "You have encourtered a Green Slime" << endl;
-							cout << endl << endl;
-
-							int greenSlime;
-
-							cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
-							cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
-							cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-							cout << endl << endl << endl;
-							cout << "===============================================" << endl;
-						}	
-
 					}
 
 					else {
-						cout << endl;
-						cout << "Invalid Action" << endl;
+						cout << "You have encourtered a Green Slime" << endl;
+						cout << endl << endl;
+
+						greenSlime(Mname, Mlvl, MHp, MHpMax, MMp, MMpMax, MAtk, MDef, MSatk, MSdef, MAgi, MEva);
+
+						cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
+						cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
+						cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
+						cout << endl << endl << endl;
+						cout << "===============================================" << endl;
+
+						if (action == "Attack" || action == "attack") {
+
+							int dmg = ((Atk + Satk) - (MDef + MSdef)) * 1.5;
+							int Mdmg = ((MAtk + MSatk) - (Def + Sdef));
+
+							MHp = MHp - dmg;
+							Hp = Hp - Mdmg;
+							cout << "You attacked  " << Mname << "!" << endl;
+							cout << Mname << " took" << dmg << " damage!" << endl;
+							cout << endl;
+							cout << Mname << " counter attacked!" << endl;
+							cout << "You took " << Mdmg << " damage!" << endl;
+							cin >> cont;
+						}
 					}
+				}
+
 			}
+
+			else {
+				cout << endl;
+				cout << "Invalid Action" << endl;
+			}
+		}
 	}
 
 	else {
@@ -136,11 +208,8 @@ int main() {
 
 }
 
-void greenSlime() {
-	string Mname;
-	int Mlvl, MHp, MHpMax, MMp, MMpMax; 
-	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
-
+void greenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva) {
+	
 	Mname = "Green Slime";
 	Mlvl = 5;
 	MHp = 10;
@@ -154,13 +223,9 @@ void greenSlime() {
 	MAgi = 2;
 	MEva = 2;
 
-	return;
 }
 
-void lavaSlime () {
-	string Mname;
-	int Mlvl, MHp, MHpMax, MMp, MMpMax; 
-	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
+void lavaSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva) {
 
 	Mname = "Lava Slime";
 	Mlvl = 5;
@@ -175,13 +240,9 @@ void lavaSlime () {
 	MAgi = 2;
 	MEva = 2;
 
-	return;
 }
 
-void mudSlime (){
-	string Mname;
-	int Mlvl, MHp, MHpMax, MMp, MMpMax; 
-	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
+void mudSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva) {
 
 	Mname = "Mud Slime";
 	Mlvl = 5;
@@ -196,12 +257,9 @@ void mudSlime (){
 	MAgi = 2;
 	MEva = 2;
 
-	return;
 }
-void goldenSlime () {
-	string Mname;
-	int Mlvl, MHp, MHpMax, MMp, MMpMax; 
-	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
+
+void goldenSlime (string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva) {
 
 	Mname = "Golden Slime";
 	Mlvl = 5;
@@ -215,6 +273,6 @@ void goldenSlime () {
 	MSdef = 0;
 	MAgi = 1;
 	MEva = 1;
-
-	return;
 }
+
+
