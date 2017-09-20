@@ -7,14 +7,8 @@
 #include <iomanip>
 
 using namespace std;
-void greenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void lavaSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void mudSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void goldenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
 
-int main() {
-
-	string gameStart, name, MenuSelect, action, cont;
+        string gameStart, name, MenuSelect, action, cont;
 	int Hp, Mp, HpMax, MpMax, Lvl;
 	int Atk, Satk, Def, Sdef, Agi, Eva, Luck;
 
@@ -36,6 +30,13 @@ int main() {
 	Agi = 5;
 	Eva = 5;
 	Luck = 10;
+
+void greenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void lavaSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void mudSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+void goldenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
+
+int main() {
 
 	cout << "Welcome to Text and Monsters! Would you like to play?" << endl;
 	cout << "\t Yes or No" << endl;
