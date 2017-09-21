@@ -1,4 +1,4 @@
-// TextandMonsters2.cpp : Defines the entry point for the console application.
+// TextandMonsters1.1.cpp : Defines the entry point for the console application.
 //Nichol He
 
 #include "stdafx.h"
@@ -47,9 +47,10 @@ int main() {
 		cout << endl << endl;
 
 		while (Lvl < 100) {
-			cout << "Lvl " << Lvl << "(" << exp << "/" << expCap << ")" << " " << name << endl;
-			cout << "HP = (" << Hp << "/" << HpMax << ")" << endl;
-			cout << "MP = (" << Mp << "/" << MpMax << ")" << endl;
+			cout << "  " << name << endl;
+			cout << "  Lvl " << Lvl << " (" << exp << "/" << expCap << ")" << endl;
+			cout << "  HP = (" << Hp << "/" << HpMax << ")" << endl;
+			cout << "  MP = (" << Mp << "/" << MpMax << ")" << endl;
 			cout << endl << endl << endl << endl;
 			cout << "=======================================" << endl;
 			cout << endl << endl;
@@ -80,9 +81,6 @@ int main() {
 				expDrop = 10;
 
 				do {
-
-					expDif = (expCap - expDrop) - exp;
-					exp = exp + expDrop;
 					
 					cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
 					cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
@@ -123,6 +121,9 @@ int main() {
 					}
 
 				} while ((Hp > 0) && (MHp > 0));
+
+				exp = exp + expDrop;
+				expDif = expCap - exp;
 
 				cout << "You have defeated the " << Mname << endl;
 				cout << "You gained " << expDrop << " exp" << endl;
