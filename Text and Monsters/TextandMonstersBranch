@@ -22,7 +22,7 @@ int main() {
 	int exp, expDrop, expCap, expDif;
 
 	int rng;
-	expCap = 100;
+	expCap = 10;
 	exp = 0;
 	Hp = 10;
 	Mp = 8;
@@ -129,10 +129,11 @@ int main() {
 				cout << "You gained " << expDrop << " exp" << endl;
 				cout << endl;
 					
-				if (expDrop >= expCap) {
+				if (exp >= expCap) {
 					cout << "Congratulations! You gained a level!" << endl;
 					cout << endl;
 						expCap = expCap + 10;
+						exp = 0;
 						Hp = Hp + 2;
 						Mp = Mp + 2;
 						HpMax = HpMax + 2;
