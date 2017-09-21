@@ -1,4 +1,4 @@
-// TextandMonsters1.1.cpp : Defines the entry point for the console application.
+// TextandMonsters2.cpp : Defines the entry point for the console application.
 //Nichol He
 
 #include "stdafx.h"
@@ -8,34 +8,29 @@
 #include <iomanip>
 
 using namespace std;
-void greenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void lavaSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void mudSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
-void goldenSlime(string &Mname, int &Mlvl, int &MHp, int &MHpMax, int &MMp, int &MMpMax, int &MAtk, int &MDef, int &MSatk, int &MSdef, int &MAgi, int &MEva);
 
 int main() {
 
 	string gameStart, name, MenuSelect, action, cont;
 	int Hp, Mp, HpMax, MpMax, Lvl;
-	int Atk, Satk, Def, Sdef, Agi, Eva, Luck;
+	int Atk, Def, Luck;
 
 	string Mname;
 	int Mlvl, MHp, MHpMax, MMp, MMpMax;
-	int MAtk, MDef, MSatk, MSdef, MAgi, MEva;
+	int MAtk, MDef;
+
+	int exp, expDrop, expCap, expDif;
 
 	int rng;
-
+	expCap = 100;
+	exp = 0;
 	Hp = 10;
 	Mp = 8;
 	HpMax = 10;
 	MpMax = 8;
 	Lvl = 1;
-	Atk = 2;
-	Satk = 2;
-	Def = 2;
-	Sdef = 2;
-	Agi = 5;
-	Eva = 5;
+	Atk = 3;
+	Def = 3;
 	Luck = 10;
 
 	cout << "Welcome to Text and Monsters! Would you like to play?" << endl;
@@ -52,7 +47,7 @@ int main() {
 		cout << endl << endl;
 
 		while (Lvl < 100) {
-			cout << "Lvl " << Lvl << " " << name << endl;
+			cout << "Lvl " << Lvl << "(" << exp << "/" << expCap << ")" << " " << name << endl;
 			cout << "HP = (" << Hp << "/" << HpMax << ")" << endl;
 			cout << "MP = (" << Mp << "/" << MpMax << ")" << endl;
 			cout << endl << endl << endl << endl;
@@ -62,70 +57,126 @@ int main() {
 			cout << "Battle" << endl;
 			cout << endl;
 			cin >> MenuSelect;
-			cout << endl;
+			cout << endl << endl << endl;
 
 			if (MenuSelect == "Battle" || MenuSelect == "battle") {
 
 				srand(time(NULL));
 				rng = rand() % 100;
-				MHp = 12;
 
-						cout << "You have encourtered a Green Slime" << endl;
-						cout << endl << endl;
+				cout << "===============================================" << endl;
+				cout << endl;
+				cout << "You have encourtered a Green Slime" << endl;
+				cout << endl << endl;
 
-						Mname = "Green Slime";
-						Mlvl = 5;
-						MHp = 10;
-						MHpMax = 10;
-						MMp = 5;
-						MMpMax = 5;
-						MAtk = 2;
-						MDef = 1;
-						MSatk = 0;
-						MSdef = 0;
-						MAgi = 2;
-						MEva = 2;
+				Mname = "Green Slime";
+				Mlvl = 5;
+				MHp = 10;
+				MHpMax = 10;
+				MMp = 5;
+				MMpMax = 5;
+				MAtk = 2;
+				MDef = 1;
+				expDrop = 10;
 
-						while (MHp > 0 || Hp > 0) {
+				do {
 
-						cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
-						cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
-						cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-						cout << endl << endl << endl;
+					expDif = (expCap - expDrop) - exp;
+					exp = exp + expDrop;
+					
+					cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
+					cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
+					cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
+					cout << endl << endl << endl;
+					cout << "===============================================" << endl;
+
+					cout << endl;
+					cout << "Attack" << endl;
+					cin >> action;
+
+					if (action == "Attack" || action == "attack") {
+
+						int dmg = (Atk - MDef) * 1.5;
+						int Mdmg = (MAtk - Def);
+
+								if (Mdmg < 0) {
+									Mdmg = 0;
+									}
+
+								if (dmg < 0) {
+									dmg = 0;
+								}
+
+						MHp = MHp - dmg;
+						Hp = Hp - Mdmg;
 						cout << "===============================================" << endl;
-
 						cout << endl;
-						cout << "Attack" << endl;
-						cin >> action;
+						cout << "You attacked " << Mname << "!" << endl;
+						cout << Mname << " took " << dmg << " damage!" << endl;
+						cout << endl;
+						cout << Mname << " counter attacked!" << endl;
+						cout << "You took " << Mdmg << " damage!" << endl;
+						cout << endl;
+						cout << "===============================================";
+						cin >> cont;
+						cout << endl << endl << endl;
+					}
 
-						if (action == "Attack" || action == "attack") {
+				} while ((Hp > 0) && (MHp > 0));
 
-							int dmg = ((Atk + Satk) - (MDef + MSdef)) * 1.5;
-							int Mdmg = ((MAtk + MSatk) - (Def + Sdef));
+				cout << "You have defeated the " << Mname << endl;
+				cout << "You gained " << expDrop << " exp" << endl;
+				cout << endl;
+					
+				if (expDrop >= expCap) {
+					cout << "Congratulations! You gained a level!" << endl;
+					cout << endl;
+						expCap = expCap + 10;
+						Hp = Hp + 2;
+						Mp = Mp + 2;
+						HpMax = HpMax + 2;
+						MpMax = MpMax + 2;
+						Lvl = Lvl + 1;
+						Atk = Atk + 2;
+						Def = Def + 2;
+						Luck = 10;
+						cout << "Max HP + 2" << endl;
+						cout << "Max MP + 2" << endl;
+						cout << "Atk + 2" << endl;
+						cout << "Def + 2" << endl;
+						cout << endl;
+						cout << "===============================================" << endl;
+						cin >> cont;
+						cout << endl;
+					}
 
-							MHp = MHp - dmg;
-							Hp = Hp - Mdmg;
-
-							cout << "You attacked  " << Mname << "!" << endl;
-							cout << Mname << " took " << dmg << " damage!" << endl;
-							cout << endl;
-							cout << Mname << " counter attacked!" << endl;
-							cout << "You took " << Mdmg << " damage!" << endl;
-							cin >> cont;
-							cout << endl << endl;
-
-							if (Hp > 10) {
-								Hp = 10;
-							}
-						}
+				else {
+					cout << "Exp until Next level " << expDif << endl;
+					cout << endl;
+					cout << "===============================================";
+					cin >> cont;
+					cout << endl;
 				}
-				}
+
+
+
+
+			}
 			else {
 				cout << endl;
 				cout << "Invalid Action" << endl;
-				}
 			}
+
+
+
+		}
+
+
+
 	}
+
+
+
 
 	else {
 		cout << endl;
@@ -135,10 +186,4 @@ int main() {
 
 
 }
-
-
-
-
-
-
 
