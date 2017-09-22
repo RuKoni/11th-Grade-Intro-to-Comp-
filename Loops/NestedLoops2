@@ -1,0 +1,32 @@
+//Nichol He
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+	int a, b;
+	a = 0;
+	b = 0;
+	
+	while (a < 5) {
+  
+		b = a;
+		a++;
+
+			do {
+
+				cout << "*";
+				b++;
+
+			} while (b < 5);
+      
+		cout << endl;
+      
+	}
+
+	return 0;
+
+}
