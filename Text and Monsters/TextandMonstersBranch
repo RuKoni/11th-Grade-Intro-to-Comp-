@@ -1,4 +1,4 @@
-// TextandMonsters1.1.cpp : Defines the entry point for the console application.
+// TextAndMonstersBranch.cpp : Defines the entry point for the console application.
 //Nichol He
 
 #include "stdafx.h"
@@ -56,6 +56,7 @@ int main() {
 			cout << endl << endl;
 
 			cout << "Battle" << endl;
+			cout << "Rest" << endl;
 			cout << endl;
 			cin >> MenuSelect;
 			cout << endl << endl << endl;
@@ -164,9 +165,27 @@ int main() {
 
 
 			}
+
+			else if (MenuSelect == "Rest" || MenuSelect == "rest") {
+				Hp = HpMax;
+				Mp = MpMax;
+				cout << "===============================================";
+				cout << endl;
+				cout << "You turned in for the day." << endl;
+				cout << "Hp restored" << endl;
+				cout << "Mp restored" << endl;
+				cout << endl;
+				cout << "===============================================";
+				cin >> cont;
+			}
+
 			else {
+				cout << "===============================================";
 				cout << endl;
 				cout << "Invalid Action" << endl;
+				cout << endl << endl;
+				cout << "===============================================";
+				cin >> cont;
 			}
 
 
@@ -188,4 +207,3 @@ int main() {
 
 
 }
-
