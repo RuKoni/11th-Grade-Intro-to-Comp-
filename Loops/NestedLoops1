@@ -1,0 +1,35 @@
+//Nichol He
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int main() {
+
+	int a, b, c;
+  
+	a = 0;
+	b = 0;
+	c = 6;
+	
+	while (a < 5) {
+  
+		a++;
+		c--;
+		b = 0;
+
+			do {
+      
+				cout << "*";
+				b++;
+
+			} while (b < c);
+      
+  	cout << endl;
+      
+	}
+
+	return 0;
+
+}
