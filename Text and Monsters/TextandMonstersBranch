@@ -1,4 +1,4 @@
-// TextandMonsters2.cpp : Defines the entry point for the console application.
+// TextandMonstersBranch.cpp : Defines the entry point for the console application.
 // Nichol He
 
 #include "stdafx.h"
@@ -27,7 +27,7 @@ int main() {
 	expCap = 10;
 	exp = 0;
 
-	int rng;
+	int rng, loop;
 
 	cout << "Welcome to Text and Monsters! Would you like to play?" << endl;
 	cout << "\t Yes or No" << endl;
@@ -98,6 +98,8 @@ int main() {
 
 		while (Lvl < 20) {
 
+			loop = 1;
+
 			if (Hp > HpMax) {
 				Hp = HpMax;
 			}
@@ -151,8 +153,8 @@ int main() {
 				MMpMax = (MMpMax + Lvl);
 				MHp = MHpMax;
 				MMp = MMpMax;
-				MAtk = (MAtk + Lvl) * 1.5;
-				MDef = (MDef + Lvl) * 1.5;
+				MAtk = (MAtk + Lvl ^ (1/5)) * 1.5;
+				MDef = (MDef + Lvl ^ (1/5)) * 1.5;
 
 				do {
 
@@ -187,6 +189,7 @@ int main() {
 					cout << endl;
 					cout << "Attack" << endl;
 					cout << "Skill" << endl;
+					cout << "Run" << endl;
 					cout << endl;
 					cin >> action;
 					cin.ignore();
@@ -287,6 +290,17 @@ int main() {
 								dmg = 0;
 							}
 
+						if (Mp < 0) {
+
+							cout << "You don't have enough MP!" << endl;
+							cin >> cont; 
+							Skill = "Attack";
+							dmg = (Atk - MDef);
+							Mdmg = (MAtk - Def);
+
+							Mp = 0;
+						}
+
 						MHp = MHp - dmg;
 						Hp = Hp - Mdmg;
 
@@ -303,13 +317,44 @@ int main() {
 						cout << "===============================================";
 						cin >> cont;
 					}
+				
+					else if ( action == "run" || action == "Run" ) {
+						if ( rng >= 0 && rng <= 50 ) {
 
-				} while ((Hp > 0) && (MHp > 0));
+							cout << "===============================================" << endl;
+							cout << endl;
+							cout << "You successfully escaped from battle!" << endl;
+							cout << endl;
+							cout << "===============================================";
+							cin >> cont;
+							loop = 0;
+						}
+						else {
+
+							cout << "You couldn't get away!" << endl;
+							cout << endl;
+							cin >> cont;
+
+							Mdmg = MAtk - Def;
+
+							cout << "===============================================" << endl;
+							cout << Mname << " attacked!" << endl;
+							cout << "You took " << Mdmg << " damage!" << endl;
+							cout << endl;
+							cout << "===============================================";
+							cin >> cont;
+						}
+					}
+
+				} while ((Hp > 0) && (MHp > 0) && (loop != 0));
+
 
 				if (Hp <= 0) {
 					cout << "GAME OVER" << endl;
 					cout << "===============================================";
 					cin >> cont;
+					
+					return 0;
 				}
 
 				if (MHp <= 0) {
