@@ -1,5 +1,5 @@
-// TextAndMonstersBranch.cpp : Defines the entry point for the console application.
-//Nichol He
+// TextandMonsters2.cpp : Defines the entry point for the console application.
+// Nichol He
 
 #include "stdafx.h"
 #include <iostream>
@@ -11,9 +11,11 @@ using namespace std;
 
 int main() {
 
-	string gameStart, name, MenuSelect, action, cont;
+	string gameStart, name, MenuSelect, action, cont, Pclass, Skill;
+	string BladeMaster, Paladin, ArchMage, SpiritMage;
 	int Hp, Mp, HpMax, MpMax, Lvl;
 	int Atk, Def, Luck;
+	int dmg, Mdmg;
 
 	string Mname;
 	int Mlvl, MHp, MHpMax, MMp, MMpMax;
@@ -21,17 +23,11 @@ int main() {
 
 	int exp, expDrop, expCap, expDif;
 
-	int rng;
+	Lvl = 1;
 	expCap = 10;
 	exp = 0;
-	Hp = 10;
-	Mp = 8;
-	HpMax = 10;
-	MpMax = 8;
-	Lvl = 1;
-	Atk = 3;
-	Def = 3;
-	Luck = 10;
+
+	int rng;
 
 	cout << "Welcome to Text and Monsters! Would you like to play?" << endl;
 	cout << "\t Yes or No" << endl;
@@ -42,17 +38,81 @@ int main() {
 		cout << "Please enter your name" << endl;
 		cout << endl;
 		cin >> name;
+		cin.ignore();
+		cout << endl << endl;
+		cout << "Please Select a class" << endl;
+		cout << "\t Blade Master || Paladin || Arch Mage || Spirit Mage" << endl;
+		getline(cin, Pclass);
 		cout << endl << endl;
 		cout << "Welcome, " << name << endl;
 		cout << endl << endl;
 
-		while (Lvl < 100) {
+		if (Pclass == "Blade Master" || Pclass == "Blade master" || Pclass == "blade master") {
+			Pclass = BladeMaster;
+			Hp = 10;
+			Mp = 5;
+			HpMax = 10;
+			MpMax = 5;
+			Atk = 5;
+			Def = 3;
+			Luck = 10;
+		}
+
+		else if (Pclass == "Paladin" || Pclass == "paladin") {
+			Pclass = Paladin;
+			Hp = 12;
+			Mp = 8;
+			HpMax = 12;
+			MpMax = 8;
+			Atk = 3;
+			Def = 5;
+			Luck = 10;
+		}
+
+		else if (Pclass == "Arch Mage" || Pclass == "Arch mage" || Pclass == "arch mage") {
+			Pclass = ArchMage;
+			Hp = 8;
+			Mp = 8;
+			HpMax = 8;
+			MpMax = 8;
+			Atk = 5;
+			Def = 3;
+			Luck = 10;
+		}
+
+		else if (Pclass == "Spirit Mage" || Pclass == "Spirit mage" || Pclass == "spirit mage") {
+			Pclass = SpiritMage;
+			Hp = 10;
+			Mp = 10;
+			HpMax = 10;
+			MpMax = 10;
+			Atk = 4;
+			Def = 4;
+			Luck = 10;
+		}
+
+		else {
+			cout << "Invalid Entry" << endl;
+			return 0;
+		}
+
+		while (Lvl < 20) {
+
+			if (Hp > HpMax) {
+				Hp = HpMax;
+			}
+
+			if (Mp > MpMax) {
+				Mp = MpMax;
+			}
+
+			cout << "===============================================" << endl;
 			cout << "  " << name << endl;
 			cout << "  Lvl " << Lvl << " (" << exp << "/" << expCap << ")" << endl;
 			cout << "  HP = (" << Hp << "/" << HpMax << ")" << endl;
 			cout << "  MP = (" << Mp << "/" << MpMax << ")" << endl;
 			cout << endl << endl << endl << endl;
-			cout << "=======================================" << endl;
+			cout << "===============================================" << endl;
 			cout << endl << endl;
 
 			cout << "Battle" << endl;
@@ -64,47 +124,85 @@ int main() {
 			if (MenuSelect == "Battle" || MenuSelect == "battle") {
 
 				srand(time(NULL));
-				rng = rand() % 100;
+				rng = rand() % 100; 
+				
+				if (rng < 100 && rng > 0) {
 
-				cout << "===============================================" << endl;
-				cout << endl;
-				cout << "You have encourtered a Green Slime" << endl;
-				cout << endl << endl;
+					cout << "===============================================" << endl;
+					cout << endl;
+					cout << "You have encourtered a Green Slime" << endl;
+					cout << endl << endl;
+					cout << "===============================================" << endl;
 
-				Mname = "Green Slime";
-				Mlvl = 5;
-				MHp = 10;
-				MHpMax = 10;
-				MMp = 5;
-				MMpMax = 5;
-				MAtk = 2;
-				MDef = 1;
-				expDrop = 10;
+					Mname = "Green Slime";
+					Mlvl = 4;
+					MHp = 9;
+					MHpMax = 9;
+					MMp = 4;
+					MMpMax = 4;
+					MAtk = 2;
+					MDef = 2;
+					expDrop = 10;
+
+				}
+
+				Mlvl = (Mlvl + Lvl);
+				MHpMax = (MHpMax + Lvl);
+				MMpMax = (MMpMax + Lvl);
+				MHp = MHpMax;
+				MMp = MMpMax;
+				MAtk = (MAtk + Lvl) * 1.5;
+				MDef = (MDef + Lvl) * 1.5;
 
 				do {
+
+					srand(time(NULL));
+					rng = rand() % 100;
+
+					Mp = Mp + 1;
+
+					if (Hp > HpMax) {
+						Hp = HpMax;
+					}
 					
+					if (Mp > MpMax) {
+						Mp = MpMax;
+					}
+
+					if (MHp > MHpMax) {
+						MHp = MHpMax;
+					}
+
+					if (MMp > MMpMax) {
+						MMp = MMpMax;
+					}
+
+					cout << "===============================================" << endl;
 					cout << "Lvl " << Lvl << " " << name << setw(22) << "Lvl " << Mlvl << " " << Mname << endl;
 					cout << "HP = ( " << Hp << "/" << HpMax << " )" << setw(22) << "HP = ( " << MHp << "/" << MHpMax << " )" << endl;
 					cout << "MP = ( " << Mp << "/" << MpMax << " )" << setw(24) << "MP = ( " << MMp << "/" << MMpMax << " )" << endl;
-					cout << endl << endl << endl;
+					cout << endl << endl << endl << endl;
 					cout << "===============================================" << endl;
 
 					cout << endl;
 					cout << "Attack" << endl;
+					cout << "Skill" << endl;
+					cout << endl;
 					cin >> action;
+					cin.ignore();
 
 					if (action == "Attack" || action == "attack") {
 
-						int dmg = (Atk - MDef) * 1.5;
-						int Mdmg = (MAtk - Def);
+						dmg = (Atk - MDef);
+						Mdmg = (MAtk - Def);
 
-								if (Mdmg < 0) {
-									Mdmg = 0;
-									}
+						if (Mdmg < 0) {
+							Mdmg = 0;
+						}
 
-								if (dmg < 0) {
-									dmg = 0;
-								}
+						if (dmg < 0) {
+							dmg = 0;
+						}
 
 						MHp = MHp - dmg;
 						Hp = Hp - Mdmg;
@@ -118,21 +216,114 @@ int main() {
 						cout << endl;
 						cout << "===============================================";
 						cin >> cont;
-						cout << endl << endl << endl;
+						cout << endl;
+					}
+
+					else if (action == "Skill" || action == "skill") {
+
+						if (Pclass == BladeMaster) {
+							cout << "===============================================" << endl;
+							if (Lvl > 0) {
+								cout << "Flying Sparrow" << endl;
+								if (Lvl >= 5) {
+									cout << "Horizontal Square" << endl;
+									if (Lvl >= 10) {
+										cout << "Parry Counter" << endl;
+										if (Lvl >= 15) {
+											cout << "Vorpal Strike" << endl;
+											if (Lvl >= 20) {
+												cout << "Blood Thirst" << endl;
+											}
+										}
+									}
+								}
+							}
+						}
+						cout << endl;
+						getline(cin, Skill);
+
+						cout << "===============================================";
+						cout << endl;
+
+						if (Skill == "Flying Sparrow" || Skill == "Flying sparrow" || Skill == "flying sparrow") {
+							dmg = (Atk - MDef) * 2;
+							Mdmg = (MAtk - Def);
+							Mp = Mp - 3;
+						}
+
+						else if (Skill == "Horizontal Square" || Skill == "Horizontal square" || Skill == "horizontal square") {
+							dmg = (Atk - MDef) * 2;
+								if (rng > 25 && rng < 50) {
+									dmg = (Atk - Def) * 4;
+								}
+							Mdmg = (MAtk - Def);
+							Mp = Mp - 4;
+						}
+
+						else if (Skill == "Parry Counter" || Skill == "Parry counter" || Skill == "parry counter") {
+
+							if (rng > 33 && rng < 66) {
+								dmg = (Atk - MDef) * Mdmg;
+								Mdmg = 0;
+							}
+							else {
+								dmg = Atk * (3 / 4) - MDef;
+								Mdmg = MAtk;
+							}
+							Mp = Mp - 4;
+						}
+
+						else {
+							Skill = "Flinch";
+							Mdmg = MAtk - Def;
+							dmg = 0;
+						}
+
+							if (Mdmg < 0) {
+								Mdmg = 0;
+							}
+
+							if (dmg < 0) {
+								dmg = 0;
+							}
+
+						MHp = MHp - dmg;
+						Hp = Hp - Mdmg;
+
+						cout << "===============================================" << endl;
+						cout << endl;
+						cout << "You activated " << Skill << endl;
+						cout << endl;
+						cout << "You attacked " << Mname << "!" << endl;
+						cout << Mname << " took " << dmg << " damage!" << endl;
+						cout << endl;
+						cout << Mname << " counter attacked!" << endl;
+						cout << "You took " << Mdmg << " damage!" << endl;
+						cout << endl;
+						cout << "===============================================";
+						cin >> cont;
 					}
 
 				} while ((Hp > 0) && (MHp > 0));
 
-				exp = exp + expDrop;
-				expDif = expCap - exp;
+				if (Hp <= 0) {
+					cout << "GAME OVER" << endl;
+					cout << "===============================================";
+					cin >> cont;
+				}
 
-				cout << "You have defeated the " << Mname << endl;
-				cout << "You gained " << expDrop << " exp" << endl;
-				cout << endl;
-					
-				if (exp >= expCap) {
-					cout << "Congratulations! You gained a level!" << endl;
+				if (MHp <= 0) {
+
+					exp = exp + expDrop;
+					expDif = expCap - exp;
+
+					cout << "You have defeated the " << Mname << endl;
+					cout << "You gained " << expDrop << " exp" << endl;
 					cout << endl;
+
+					if (exp >= expCap) {
+						cout << "Congratulations! You gained a level!" << endl;
+						cout << endl;
 						expCap = expCap + 10;
 						exp = 0;
 						Hp = Hp + 2;
@@ -153,25 +344,24 @@ int main() {
 						cout << endl;
 					}
 
-				else {
-					cout << "Exp until Next level " << expDif << endl;
-					cout << endl;
-					cout << "===============================================";
-					cin >> cont;
-					cout << endl;
+					else {
+						cout << "Exp until Next level " << expDif << endl;
+						cout << endl;
+						cout << "===============================================";
+						cin >> cont;
+						cout << endl;
+					}
+
 				}
-
-
-
-
 			}
 
 			else if (MenuSelect == "Rest" || MenuSelect == "rest") {
 				Hp = HpMax;
 				Mp = MpMax;
-				cout << "===============================================";
+				cout << "===============================================" << endl;
 				cout << endl;
 				cout << "You turned in for the day." << endl;
+				cout << endl;
 				cout << "Hp restored" << endl;
 				cout << "Mp restored" << endl;
 				cout << endl;
@@ -192,12 +382,7 @@ int main() {
 
 		}
 
-
-
 	}
-
-
-
 
 	else {
 		cout << endl;
