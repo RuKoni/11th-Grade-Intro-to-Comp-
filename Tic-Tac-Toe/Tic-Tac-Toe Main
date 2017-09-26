@@ -1,0 +1,85 @@
+// Tic-Tac-Toe.cpp : Defines the entry point for the console application.
+// Nichol He
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+
+int main()
+{
+	char sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8, sp9, move, player;
+	int turn = 2;
+	char mark;
+
+	sp1 = 'A';
+	sp2 = 'B';
+	sp3 = 'C';
+	sp4 = 'D';
+	sp5 = 'E';
+	sp6 = 'F';
+	sp7 = 'G';
+	sp8 = 'H';
+	sp9 = 'I';
+
+	while ((sp1 != sp2 != sp3) && (sp4 != sp5 != sp6) && (sp7 != sp8 != sp9) && (sp1 != sp4 != sp7) && (sp2 != sp5 != sp8) && (sp3 != sp6 != sp9) && (sp1 != sp4 != sp7) && (sp1 != sp5 != sp9) && (sp3 != sp5 != sp7)) {
+
+	if ((turn % 2) == 0) {
+		mark = 'O';
+		player = '1';
+	}
+	else if ((turn % 2) == 1) {
+		mark = 'X';
+		player = '2';
+	}
+
+	cout << "\t" << sp1 << " | " << sp2 << " | " << sp3 << endl;
+	cout << "     ---------------" << endl;
+	cout << "\t" << sp4 << " | " << sp5 << " | " << sp6 << endl;
+	cout << "     ---------------" << endl;
+	cout << "\t" << sp7 << " | " << sp8 << " | " << sp9 << endl;
+	cout << endl << endl;
+
+	cout << "Player " << player << ") "<< "Please enter the letter of the space you want to occupy  ";
+		cin >> move;
+	cout << endl << endl;
+
+	switch (move) {
+
+		case ('A'):
+			sp1 = mark;
+			break;
+		case ('B'):
+			sp2 = mark;
+			break;
+		case ('C'):
+			sp3 = mark;
+			break;
+		case ('D'):
+			sp4 = mark;
+			break;
+		case ('E'):
+			sp5 = mark;
+			break;
+		case ('F'):
+			sp6 = mark;
+			break;
+		case ('G'):
+			sp7 = mark;
+			break;
+		case ('H'):
+			sp8 = mark;
+			break;
+		case ('I'):
+			sp9 = mark;
+			break;
+	}
+
+	 turn++;
+
+	}
+
+	return 0;
+}
+
