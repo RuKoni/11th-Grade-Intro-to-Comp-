@@ -128,7 +128,8 @@ int main() {
 				srand(time(NULL));
 				rng = rand() % 100; 
 				
-				if (rng < 100 && rng > 0) {
+				
+				if (Lvl < 3) {
 
 					cout << "===============================================" << endl;
 					cout << endl;
@@ -148,13 +149,56 @@ int main() {
 
 				}
 
+				else if (Lvl >= 3 && Lvl < 10) {
+
+					if (rng > 0 && rng <= 50) {
+
+							cout << "===============================================" << endl;
+					cout << endl;
+					cout << "You have encourtered a Mud Slime" << endl;
+					cout << endl << endl;
+					cout << "===============================================" << endl;
+
+					Mname = "Mud Slime";
+					Mlvl = 6;
+					MHp = 12;
+					MHpMax = 12;
+					MMp = 7;
+					MMpMax = 7;
+					MAtk = 3;
+					MDef = 5;
+					expDrop = 15;
+
+					}
+
+					else if (rng > 50 && rng <= 100) {
+
+					cout << "===============================================" << endl;
+					cout << endl;
+					cout << "You have encourtered a Lava Slime" << endl;
+					cout << endl << endl;
+					cout << "===============================================" << endl;
+
+					Mname = "Lava Slime";
+					Mlvl = 6;
+					MHp = 10;
+					MHpMax = 10;
+					MMp = 6;
+					MMpMax = 6;
+					MAtk = 5;
+					MDef = 3;
+					expDrop = 15;
+
+					}
+				}
+
 				Mlvl = (Mlvl + Lvl);
 				MHpMax = (MHpMax + Lvl);
 				MMpMax = (MMpMax + Lvl);
 				MHp = MHpMax;
 				MMp = MMpMax;
-				MAtk = (MAtk + Lvl ^ (1/5)) * 1.5;
-				MDef = (MDef + Lvl ^ (1/5)) * 1.5;
+				MAtk = (MAtk + Lvl) * 1.5;
+				MDef = (MDef + Lvl) * 1.5;
 
 				do {
 
@@ -224,24 +268,29 @@ int main() {
 
 					else if (action == "Skill" || action == "skill") {
 
-						if (Pclass == BladeMaster) {
-							cout << "===============================================" << endl;
-							if (Lvl > 0) {
-								cout << "Flying Sparrow" << endl;
+					if (Pclass == BladeMaster) {
+
+						cout << "===============================================" << endl;
+						if (Lvl > 0) {
+							cout << "Flying Sparrow" << endl;
+							if (Lvl >= 3) {
+								cout << "Horizontal Square" << endl;
 								if (Lvl >= 5) {
-									cout << "Horizontal Square" << endl;
+									cout << "Parry Counter" << endl;
 									if (Lvl >= 10) {
-										cout << "Parry Counter" << endl;
+										cout << "Stance [Ghost Walker / Blood Thirst]" << endl;
 										if (Lvl >= 15) {
 											cout << "Vorpal Strike" << endl;
 											if (Lvl >= 20) {
-												cout << "Blood Thirst" << endl;
+												cout << "Lightning Edge" << endl;
 											}
 										}
 									}
 								}
 							}
 						}
+					}
+
 						cout << endl;
 						getline(cin, Skill);
 
@@ -343,6 +392,8 @@ int main() {
 							cout << endl;
 							cout << "===============================================";
 							cin >> cont;
+
+							Hp = Hp - Mdmg;
 						}
 					}
 
@@ -435,5 +486,5 @@ int main() {
 	}
 
 
-
+	return 0;
 }
