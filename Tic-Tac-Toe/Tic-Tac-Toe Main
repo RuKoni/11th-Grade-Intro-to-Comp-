@@ -1,6 +1,12 @@
 // Tic-Tac-Toe.cpp : Defines the entry point for the console application.
 // Nichol He
 
+/*
+Simple, two player game of Tic-Tac-Toe.
+Enter the number of the space you want to occupy
+Entering an occupied space or anything other than a number would result in an Inavlid Move and repeat of turn.
+Game ends if all spaces are occupied without a winner or a 3 in a row
+*/
 #include "stdafx.h"
 #include <iostream>
 
@@ -9,23 +15,27 @@ using namespace std;
 
 int main()
 {
+	// Declares variables for spaces, turns, marks and end game variable
 	char sp1, sp2, sp3, sp4, sp5, sp6, sp7, sp8, sp9, move, player;
 	int turn = 2;
 	char mark;
+	bool end = true;
 
-	sp1 = 'A';
-	sp2 = 'B';
-	sp3 = 'C';
-	sp4 = 'D';
-	sp5 = 'E';
-	sp6 = 'F';
-	sp7 = 'G';
-	sp8 = 'H';
-	sp9 = 'I';
+	// Assigns values to spaces
+	sp1 = '1';
+	sp2 = '2';
+	sp3 = '3';
+	sp4 = '4';
+	sp5 = '5';
+	sp6 = '6';
+	sp7 = '7';
+	sp8 = '8';
+	sp9 = '9';
 
-	while ((sp1 != sp2 != sp3) && (sp4 != sp5 != sp6) && (sp7 != sp8 != sp9) && (sp1 != sp4 != sp7) && (sp2 != sp5 != sp8) && (sp3 != sp6 != sp9) && (sp1 != sp4 != sp7) && (sp1 != sp5 != sp9) && (sp3 != sp5 != sp7)) {
+	// Loop while End is false
+	while (end != false) {
 
-	if ((turn % 2) == 0) {
+	if ((turn % 2) == 0) {  // If Else statements to output turn and change mark
 		mark = 'O';
 		player = '1';
 	}
@@ -34,7 +44,7 @@ int main()
 		player = '2';
 	}
 
-	cout << "\t" << sp1 << " | " << sp2 << " | " << sp3 << endl;
+	cout << "\t" << sp1 << " | " << sp2 << " | " << sp3 << endl;	// Game Board
 	cout << "     ---------------" << endl;
 	cout << "\t" << sp4 << " | " << sp5 << " | " << sp6 << endl;
 	cout << "     ---------------" << endl;
@@ -45,39 +55,154 @@ int main()
 		cin >> move;
 	cout << endl << endl;
 
-	switch (move) {
+	switch (move) {  // Switch statement to evaluate entered move and if it's a valid move
 
-		case ('A'):
+		default :
+			cout << "Invalid Move" << endl;
+			cout << endl;
+			turn--; // Repeats turn if invalid move
+			break;
+		case ('1'):
+			if (sp1 != '1') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp1 = mark;
+			}
 			break;
-		case ('B'):
+		case ('2'):
+			if (sp2 != '2') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp2 = mark;
+			}
 			break;
-		case ('C'):
+		case ('3'):
+			if (sp3 != '3') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp3 = mark;
+			}
 			break;
-		case ('D'):
+		case ('4'):
+			if (sp4 != '4') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp4 = mark;
+			}
 			break;
-		case ('E'):
+		case ('5'):
+			if (sp5 != '5') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp5 = mark;
+			}
 			break;
-		case ('F'):
+		case ('6'):
+			if (sp6 != '6') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp6 = mark;
+			}
 			break;
-		case ('G'):
+		case ('7'):
+			if (sp7 != '7') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp7 = mark;
+			}
 			break;
-		case ('H'):
+		case ('8'):
+			if (sp8 != '8') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+			}
+			else {
 			sp8 = mark;
+			}
 			break;
-		case ('I'):
+		case ('9'):
+			if (sp9 != '9') {
+				cout << "Invalid Move" << endl;
+				cout << endl;
+				turn--;
+				
+			}
+			else {
 			sp9 = mark;
+			}
 			break;
 	}
 
-	 turn++;
+	 turn++; // turn increase
 
+		// evaluates if the game is won
+	 if (sp1 == sp2 && sp1 == sp3) {
+		 end = false;
+	}
+	 else if (sp4 == sp5 && sp4 == sp6) {
+		 end = false;
+	}
+	 else if (sp7 == sp8 && sp7 == sp9) {
+		 end = false;
+	}
+	 else if (sp1 == sp4 && sp1 == sp7) {
+		 end = false;
+	}
+	 else if (sp2 == sp5 && sp2 == sp8) {
+		 end = false;
+	}
+	 else if (sp3 == sp6 && sp4 == sp9) {
+		 end = false;
+	}
+	 else if (sp1 == sp5 && sp1 == sp9) {
+		 end = false;
+	}
+	 else if (sp3 == sp5 && sp3 == sp7) {
+		 end = false;
+	}
+	 else {
+		 end = true;
+	}
+
+		// evaluated if the game is a tie
+	if (sp1 != '1' && sp2 != '2' && sp3 != '3' && sp4 != '4' && sp5 != '5' && sp6 != '6' && sp7 != '7' && sp8 != '8' && sp9 != '9' && (end = true)) {
+			cout << "\t Game Over - Tie" << endl;
+			cout << endl;
+			return 0;
+		}
+
+	} 
+
+		//couts winner based on turn the game ended on
+	if ((turn % 2) == 0) {
+		cout << "\t Winner - Player 2!" << endl;
+		cout << endl;
+	}
+	else if ((turn % 2) == 1) {
+		cout << "\t Winner - Player 1!" << endl;
+		cout << endl;
 	}
 
 	return 0;
