@@ -1,0 +1,34 @@
+// FunctionsFormat.cpp : Defines the entry point for the console application.
+// Nichol He
+
+#include "stdafx.h"
+#include <iostream>
+
+using namespace std;
+
+int squareArea(int sidea, int sideb);  //Function Prototype
+
+
+int main()
+{
+	int length, width, rectArea;
+
+	cout << "Enter length of rectangle" << endl;
+	cin >> length;
+	cout << "Enter width of rectangle" << endl;
+	cin >> width;
+
+	rectArea = squareArea (length, width); //Function Call
+
+	cout << rectArea << endl;
+
+	return 0;
+}
+
+				// Function Parameters/Actual Argument
+int squareArea (int sidea, int sideb) {		//Function Header
+											
+	int area = sidea * sideb;				//	Function Definition 
+											//
+	return area;							//
+}
