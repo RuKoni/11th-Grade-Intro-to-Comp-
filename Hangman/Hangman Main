@@ -1,0 +1,85 @@
+// Hangman.cpp : Defines the entry point for the console application.
+// Nichol He
+
+#include "stdafx.h"
+#include <iostream>
+#include <string> 
+
+using namespace std;
+
+int main()
+{
+	string word = "";
+	string guess = "";
+	string output = "";
+	string sub = "";
+	char underscore [20] = {};
+	int length = 0;
+	int attempt = 5;
+	int findchar;
+	int num = 0;
+
+	for (int i = 0; i < 20; i++) {
+		underscore [i] = '_';
+	}
+
+
+	cout << "Welcome to Hangman 2017. Host, please enter a word" << endl;
+		cin >> word;
+	cout << endl;
+
+	for (int i = 0; i < 30; i++) {
+		cout << endl;
+	}
+	
+	length = word.length();
+
+	for (int i = 0; i < length; i++) {
+		output = output + underscore[i] + " ";
+	}
+		
+	while (attempt > 0) {
+
+	num = 0;
+		// Enter Hangman picture here
+		
+	cout << endl << endl;
+	cout << output << endl;
+	cout << endl;
+	cout << "Player, please guess a letter. You have [" << attempt << "] attempts left" << endl;
+	cout << endl;
+		cin >> guess;
+
+		for (int i = 0; i < length; i++) {
+
+		sub = word.substr(i, 1);
+
+			if (sub == guess){
+				num++;
+			}
+		} 
+
+		if (num == 0) {
+			cout << endl;
+			cout << "There are no '" << guess << "'s in the word" << endl;
+			attempt = attempt - 1;
+		}
+		else {
+			cout << endl;
+			cout << "There are " << num << " " << guess << "'s in the word" << endl;
+
+			for (int i = 0; i < length; i = i + 2) {
+
+			sub = word.substr(i, 1);
+
+				if (sub == guess){
+					num++;
+					output.replace(i, 1, sub);
+				}
+			} 
+		} 
+	}
+
+	return 0;
+}
+
