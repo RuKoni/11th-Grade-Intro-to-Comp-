@@ -1,4 +1,5 @@
-// Hangman2017.cpp : Defines the entry point for the console application.
+// Hangman1.2.cpp : Defines the entry point for the console application.
+// Hangman.cpp : Defines the entry point for the console application.
 // Nichol He
 
 #include "stdafx.h"
@@ -16,12 +17,15 @@ int main()
 	string guess = "";
 	string output = "";
 	string sub = "";
+	string wordbank = "a b c d e f g h i j k l m";
+	string wordbank2 = "n o p q r s t u v w x y z";
 	char underscore[20] = {};
 	int length = 0;
 	int attempt = 5;
 	int findchar;
 	int num = 0;
 	int a = 0;
+	int replace1, replace2;
 	bool endgame = true;
 	int win;
 
@@ -51,6 +55,9 @@ int main()
 		
 		image(attempt);
 
+		cout << endl;
+		cout << wordbank << endl;
+		cout << wordbank2 << endl;
 		cout << endl << endl;
 		cout << output << endl;
 		cout << endl;
@@ -70,16 +77,27 @@ int main()
 		}
 
 		if (num == 0) {
-			cout << endl;
+
+			replace1 = wordbank.find(guess, 0);
+			replace2 = wordbank2.find(guess,0);
+
+			if (replace1 != -1) {
+				wordbank.replace(replace1, 1, " ");
+			}
+			else if (replace2 != -1) {
+				wordbank2.replace(replace2, 1, " ");
+			}
+			
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
 			cout << "There are no '" << guess << "'s in the word" << endl;
-			cout << endl << endl << endl << endl;
+			cout << endl;
 			attempt = attempt - 1;
 		}
 
 		else {
-			cout << endl;
+			cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
 			cout << "There are " << num << " " << guess << "'s in the word" << endl;
-			cout << endl << endl << endl << endl;
+			cout << endl;
 
 			for (int i = 0; i < length; i++) {
 
@@ -144,7 +162,7 @@ void image(int miss) {
 		cout << "   _____ " << endl;
 		cout << "  |     | " << endl;
 		cout << "  |     0 " << endl;
-		cout << "  |     |" << endl;
+		cout << "  |     | " << endl;
 		cout << "  |       " << endl;
 		cout << " _|_______" << endl;
 
@@ -155,7 +173,7 @@ void image(int miss) {
 		cout << "   _____ " << endl;
 		cout << "  |     | " << endl;
 		cout << "  |     0 " << endl;
-		cout << "  |     |_" << endl;
+		cout << "  |   --| " << endl;
 		cout << "  |       " << endl;
 		cout << " _|_______" << endl;
 
@@ -166,7 +184,7 @@ void image(int miss) {
 		cout << "   _____ " << endl;
 		cout << "  |     | " << endl;
 		cout << "  |     0 " << endl;
-		cout << "  |   ^|_   " << endl;
+		cout << "  |   --|-- " << endl;
 		cout << "  |          " << endl;
 		cout << " _|_______" << endl;
 
@@ -177,8 +195,8 @@ void image(int miss) {
 		cout << "   _____ " << endl;
 		cout << "  |     | " << endl;
 		cout << "  |     0 " << endl;
-		cout << "  |   ^|_     " << endl;
-		cout << "  |    ˜¦      " << endl;
+		cout << "  |   --|-- " << endl;
+		cout << "  |    /      " << endl;
 		cout << " _|_______" << endl;
 
 		break;
@@ -188,10 +206,11 @@ void image(int miss) {
 		cout << "   _____ " << endl;
 		cout << "  |     | " << endl;
 		cout << "  |     0 " << endl;
-		cout << "  |   ^|_    " << endl;
-		cout << "  |    ˜¦) " << endl;
+		cout << "  |   --|-- " << endl;
+		cout << "  |    / | " << endl;
 		cout << " _|_______" << endl;
 
 		break;
 	}
 }
+
