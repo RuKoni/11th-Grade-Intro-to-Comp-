@@ -1,2 +1,40 @@
+// FinalProjectDraft.cpp : Defines the entry point for the console application.
 // Nichol, Orien, Wyatt, Akash
 
+#include "stdafx.h"
+#include <iostream>
+#include <string>
+#include <fstream>
+#include <iomanip>
+
+using namespace std;
+void displayMenu();
+
+int main()
+{
+
+	displayMenu();
+
+	cout << endl;
+	cout << "Welcome to Wcdonalds, how may we help you?" << endl;
+	cout << "Order: ";
+
+	return 0;
+}
+
+void displayMenu() {
+	cout << " ===============================================================================================================" << endl;
+	cout << "|  Menu                                                                                                        |" << endl;
+	cout << "|                                                                                                              |" << endl;
+	cout << "|  Main                                 Drink                                Dessert                           |" << endl;
+	cout << "|                                                                                                              |" << endl;
+	cout << "|  (1) Pizza - ($46.99)                 (6) Fountain of Freedom - ($14.00)   (11) Icecream Nugget - ($24.00)   |" << endl;
+	cout << "|  (2) Meal of Depression - ($4.99)     (7) Alcohol - ($5.00)                (12) Oreo Pizza - ($26.00)        |" << endl;
+	cout << "|  (3) Turkey Burger - ($0.87)          (8) Milk - ($15.00)                  (13) Icecream Cone - ($1.00)      |" << endl;
+	cout << "|  (4) Liberty Sandwich - ($17.79)      (9) Lemonade - ($11.00)              (14) Liberty Pie - ($99.99)       |" << endl;
+	cout << "|  (5) Veggie Burger - ($1.03)          (10) Smoothie - ($30.00)             (15) ??? - ($0.15)                |" << endl;
+	cout << "|                                                                                                              |" << endl;
+	cout << "|                                                                                                              |" << endl;
+	cout << "| Caution: Safety not guarenteed, batteries not included                                                       |" << endl;
+	cout << " ===============================================================================================================" << endl;
+}
