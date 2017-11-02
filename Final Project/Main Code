@@ -1,4 +1,4 @@
-// FinalProjectDraft.cpp : Defines the entry point for the console application.
+// FinalProject.cpp : Defines the entry point for the console application.
 // Nichol, Orien, Wyatt, Akash
 
 #include "stdafx.h"
@@ -10,18 +10,19 @@
 using namespace std;
 
 void displayMenu();
-void displayReceipt(double);
-void printReceipt();
+void displayReceipt(double &totalCost, float &tax);
+void printReceipt(double, double, double);
 
 int i = 0;
 double itemPrice[15] = { 46.99, 4.99, 0.87, 17.79, 1.03, 13.99, 4.99, 14.99, 10.99, 29.99, 23.99, 25.99, 0.99, 99.99, 0.15 };
-string itemName[15] = {"Pizza", "Meal of Depression", "Turkey Burger", "Liberty Sandwich", "Veggie Burger", "Fountain of Freedom", "Alcohol", "Milk", "Lemonade", "Smoothie", "Icecream Nugget", "Oreo Pizza", "Icecream Cone", "Liberty Pie", "???"};
-double orderPrice[40] = {0};
-string orderName[40] = {""};
+string itemName[15] = { "Pizza", "Meal of Depression", "Turkey Burger", "Liberty Sandwich", "Veggie Burger", "Fountain of Freedom", "Alcohol", "Milk", "Lemonade", "Smoothie", "Icecream Nugget", "Oreo Pizza", "Icecream Cone", "Liberty Pie", "???" };
+double orderPrice[30] = { 0 };
+string orderName[30] = { "" };
 
 int main()
 {
 	int itemNum;
+	float tax;
 	bool endLoop = false;
 	double totalCost = 0;
 	double tips;
@@ -29,20 +30,30 @@ int main()
 	displayMenu();
 
 	cout << endl;
-	cout << "Welcome to Wcdonalds, how may we help you?" << endl;
+	cout << "Welcome to WcDonalds, how may we help you?" << endl;
 
-	while (endLoop == false && i <= 40) {
+	while (endLoop == false && i < 30) {
 
 		cout << endl << "Order (0 to stop): ";
 		cin >> itemNum;
 
 		if (itemNum > 0 && itemNum <= 15) {
 
-			orderPrice[i] = itemPrice[itemNum-1]; //Wyatt's Code
-			orderName[i]= itemName[itemNum-1];
-			
+			orderPrice[i] = itemPrice[itemNum - 1]; //Wyatt's Code
+			orderName[i] = itemName[itemNum - 1];
+
 			totalCost = totalCost + itemPrice[itemNum - 1];
 			i++;
+		}
+		else if (itemNum == 100 && i == 0) {
+			while (i < 15) {
+				orderPrice[i] = itemPrice[i];
+				orderName[i] = itemName[i];
+
+				totalCost = totalCost + itemPrice[i];
+				i++;
+			}
+			endLoop = true;
 		}
 		else if (itemNum == 0) {
 
@@ -61,16 +72,18 @@ int main()
 
 	}
 
-	displayReceipt(totalCost);
+	displayReceipt(totalCost, tax);
 
 	cout << "Tips: $";
 	cin >> tips;
 	totalCost = totalCost + tips;
 	cout << "-------------------------------------" << endl;
-	cout << "                                New Total Price" << endl;
+	cout << "                                New Total" << endl;
 	cout << "                                " << totalCost << endl;
-	
+	cout << "-------------------------------------" << endl;
+	cout << endl << "   ~~~ Thank you! Come Again! ~~~" << endl;
 
+	printReceipt(tax, tips, totalCost);
 
 	return 0;
 }
@@ -93,45 +106,59 @@ void displayMenu() {
 	cout << " ===============================================================================================================" << endl;
 }
 
-void displayReceipt(double totalCost) {
-	
-	float tax;
+void displayReceipt(double &totalCost, float &tax) {
 
 	cout << endl << endl;
 	cout << "-------------------------------------" << endl;
 	cout << "Item Name                       Price" << endl;
 	cout << "-------------------------------------" << endl;
 
-	for (int l = 0; l < i ; l++) {
+	for (int l = 0; l < i; l++) {
 
-	cout << orderName[l] << endl;
-	cout << "                                " << orderPrice[l] << endl;
+		cout << orderName[l] << endl;
+		cout << "                                " << orderPrice[l] << endl;
 
 	}
-	
+
 	tax = totalCost * 0.12;
-	cout << fixed << setprecision(2);
 	totalCost = totalCost + tax;
 
-	cout << "Tax" << endl;
+	cout << endl << "Tax" << endl;
+	cout << fixed << setprecision(2);
 	cout << "                                " << tax << endl;
 	cout << "-------------------------------------" << endl;
 	cout << "                                Total Price" << endl;
 	cout << "                                " << totalCost << endl;
 }
 
-void printReceipt() {
+void printReceipt(double tax, double tips, double totalCost) {
 
-	ofstream recipt;
-	
-	recipt.open("recipt.txt", ios::app);
-	if (recipt.is_open())
+	ofstream receipt;
+
+	receipt.open("receipt.txt", ios::out);
+
+	if (receipt.is_open())
 	{
-		while()
-		{
+		receipt << "       ~~~ WcDonalds ~~~" << endl;
+		receipt << "~~~ Thank You! Come Again! ~~~" << endl;
+		receipt << "------------------------------" << endl;
 
+ 		for (int l = 0; l < i; l++) {
+			receipt << orderName[l] << endl;
+			receipt << "\t \t \t" << orderPrice[l] << endl;
 		}
-		recipt.close();
+		receipt << endl;
+		receipt << fixed << setprecision(2);
+		receipt << "Tax" << "\t \t \t" << tax << endl;
+		receipt << "Tips" << "\t \t \t" << tips << endl;
+		receipt << "------------------------------" << endl;
+		receipt << "Total" << "\t \t \t" << totalCost;
+
+		receipt.close();
+	}
+
+	else {
+		cout << "Error: Receipt Failed to Print" << endl;
 	}
 
 }
