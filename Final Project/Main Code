@@ -1,4 +1,4 @@
-// FinalProject.cpp : Defines the entry point for the console application.
+// FinalProjectDraft.cpp : Defines the entry point for the console application.
 // Nichol, Orien, Wyatt, Akash
 
 #include "stdafx.h"
@@ -8,27 +8,39 @@
 #include <iomanip>
 
 using namespace std;
+
 void displayMenu();
+void displayReceipt(double);
+void printReceipt();
+
+int i = 0;
+double itemPrice[15] = { 46.99, 4.99, 0.87, 17.79, 1.03, 13.99, 4.99, 14.99, 10.99, 29.99, 23.99, 25.99, 0.99, 99.99, 0.15 };
+string itemName[15] = {"Pizza", "Meal of Depression", "Turkey Burger", "Liberty Sandwich", "Veggie Burger", "Fountain of Freedom", "Alcohol", "Milk", "Lemonade", "Smoothie", "Icecream Nugget", "Oreo Pizza", "Icecream Cone", "Liberty Pie", "???"};
+double orderPrice[40] = {0};
+string orderName[40] = {""};
 
 int main()
 {
 	int itemNum;
-	int i = 0;
 	bool endLoop = false;
 	double totalCost = 0;
-	double itemPrice[15] = { 46.99, 4.99, 0.87, 17.79, 1.03, 13.99, 4.99, 14.99, 10.99, 29.99, 23.99, 25.99, 0.99, 99.99, 0.15 };
-	string itemName[15] = {}
+	double tips;
+
 	displayMenu();
 
 	cout << endl;
 	cout << "Welcome to Wcdonalds, how may we help you?" << endl;
 
-	while (endLoop == false) {
+	while (endLoop == false && i <= 40) {
 
 		cout << endl << "Order (0 to stop): ";
 		cin >> itemNum;
 
 		if (itemNum > 0 && itemNum <= 15) {
+
+			orderPrice[i] = itemPrice[itemNum-1]; //Wyatt's Code
+			orderName[i]= itemName[itemNum-1];
+			
 			totalCost = totalCost + itemPrice[itemNum - 1];
 			i++;
 		}
@@ -47,9 +59,18 @@ int main()
 			cout << "Error: Invalid Item Number" << endl << endl;
 		}
 
-		// Call Void Receipt
-
 	}
+
+	displayReceipt(totalCost);
+
+	cout << "Tips: $";
+	cin >> tips;
+	totalCost = totalCost + tips;
+	cout << "-------------------------------------" << endl;
+	cout << "                                New Total Price" << endl;
+	cout << "                                " << totalCost << endl;
+	
+
 
 	return 0;
 }
@@ -66,7 +87,51 @@ void displayMenu() {
 	cout << "|  (4) Liberty Sandwich - ($17.79)      (9) Lemonade - ($10.99)              (14) Liberty Pie - ($99.99)       |" << endl;
 	cout << "|  (5) Veggie Burger - ($1.03)          (10) Smoothie - ($29.99)             (15) ??? - ($0.15)                |" << endl;
 	cout << "|                                                                                                              |" << endl;
+	cout << "|  (100) Buy Everything                                                                                        |" << endl;
 	cout << "|                                                                                                              |" << endl;
 	cout << "| Caution: Safety not guarenteed, batteries not included                                                       |" << endl;
 	cout << " ===============================================================================================================" << endl;
+}
+
+void displayReceipt(double totalCost) {
+	
+	float tax;
+
+	cout << endl << endl;
+	cout << "-------------------------------------" << endl;
+	cout << "Item Name                       Price" << endl;
+	cout << "-------------------------------------" << endl;
+
+	for (int l = 0; l < i ; l++) {
+
+	cout << orderName[l] << endl;
+	cout << "                                " << orderPrice[l] << endl;
+
+	}
+	
+	tax = totalCost * 0.12;
+	cout << fixed << setprecision(2);
+	totalCost = totalCost + tax;
+
+	cout << "Tax" << endl;
+	cout << "                                " << tax << endl;
+	cout << "-------------------------------------" << endl;
+	cout << "                                Total Price" << endl;
+	cout << "                                " << totalCost << endl;
+}
+
+void printReceipt() {
+
+	ofstream recipt;
+	
+	recipt.open("recipt.txt", ios::app);
+	if (recipt.is_open())
+	{
+		while()
+		{
+
+		}
+		recipt.close();
+	}
+
 }
