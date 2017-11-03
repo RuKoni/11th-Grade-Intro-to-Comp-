@@ -1,4 +1,4 @@
-// FinalProject.cpp : Defines the entry point for the console application.
+// FinalProjectDraft.cpp : Defines the entry point for the console application.
 // Nichol, Orien, Wyatt, Akash
 
 #include "stdafx.h"
@@ -21,13 +21,24 @@ string orderName[30] = { "" };
 
 int main()
 {
+	string HangmanChoice = "";
 	int itemNum;
 	float tax;
 	bool endLoop = false;
 	double totalCost = 0;
 	double tips;
 
+	ofstream logAction;
+
+	logAction.open("Program Log.txt", ios::app);
+	if (logAction.is_open() == false) {
+		cout << "Error: Log File Failed to Open" << endl;
+		return 0;
+	}
+
+		logAction << "----- Begin Log -----" << endl << endl;
 	displayMenu();
+		logAction << "Menu Load Successful" << endl;
 
 	cout << endl;
 	cout << "Welcome to WcDonalds, how may we help you?" << endl;
@@ -36,11 +47,13 @@ int main()
 
 		cout << endl << "Order (0 to stop): ";
 		cin >> itemNum;
+		logAction << "Order Item: # " << itemNum << endl;
 
 		if (itemNum > 0 && itemNum <= 15) {
 
 			orderPrice[i] = itemPrice[itemNum - 1]; //Wyatt's Code
 			orderName[i] = itemName[itemNum - 1];
+			logAction << "Name: " << orderName[i] << "| Price: " << orderPrice[i] << endl;
 
 			totalCost = totalCost + itemPrice[itemNum - 1];
 			i++;
@@ -49,6 +62,7 @@ int main()
 			while (i < 15) {
 				orderPrice[i] = itemPrice[i];
 				orderName[i] = itemName[i];
+				logAction << "Name: " << orderName[i] << "| Price: " << orderPrice[i] << endl;
 
 				totalCost = totalCost + itemPrice[i];
 				i++;
@@ -59,6 +73,7 @@ int main()
 
 			if (i < 3) {
 				cout << "Please order atleast [" << 3 - i << "] more items" << endl;
+				logAction << "# of Orders < 3" << endl;
 			}
 			else {
 				endLoop = true;
@@ -68,15 +83,19 @@ int main()
 		else {
 			cout << endl;
 			cout << "Error: Invalid Item Number" << endl << endl;
+			logAction << "Invalid Order" << endl;
 		}
 
 	}
 
 	displayReceipt(totalCost, tax);
+	logAction << "Display Receipt Successful" << endl;
 
-	cout << "Tips: $";
+	cout << "Tips: $"; // Wyatt's Code
 	cin >> tips;
 	totalCost = totalCost + tips;
+	logAction << "Tips: $" << tips << endl;
+	logAction << "Total Cost: " << totalCost << endl;
 	cout << "-------------------------------------" << endl;
 	cout << "                                New Total" << endl;
 	cout << "                                " << totalCost << endl;
@@ -84,8 +103,8 @@ int main()
 	cout << endl << "   ~~~ Thank you! Come Again! ~~~" << endl;
 
 	printReceipt(tax, tips, totalCost);
-
-	return 0;
+	logAction << "Print Receipt Successful" << endl;
+	logAction << endl <<  "----- End Log -----" << endl << endl;
 }
 
 void displayMenu() {
@@ -108,7 +127,7 @@ void displayMenu() {
 
 void displayReceipt(double &totalCost, float &tax) {
 
-	cout << endl << endl;
+	cout << endl << endl; // Orien's Code
 	cout << "-------------------------------------" << endl;
 	cout << "Item Name                       Price" << endl;
 	cout << "-------------------------------------" << endl;
@@ -133,7 +152,7 @@ void displayReceipt(double &totalCost, float &tax) {
 
 void printReceipt(double tax, double tips, double totalCost) {
 
-	ofstream receipt;
+	ofstream receipt; //Akash's Code
 
 	receipt.open("receipt.txt", ios::out);
 
@@ -162,3 +181,4 @@ void printReceipt(double tax, double tips, double totalCost) {
 	}
 
 }
+
