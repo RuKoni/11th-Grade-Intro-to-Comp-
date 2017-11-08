@@ -1,6 +1,15 @@
 // FinalProjectDraft.cpp : Defines the entry point for the console application.
 // Nichol, Orien, Wyatt, Akash
 
+/*
+Hi, Welcome to WcDonald's New Fake Offline Ordering Program!
+This program will allow you to order food items by entering the corresponding number. 
+It will then output a list of your orders, the tax and totals - Just like a normal restaurant!
+Afterwards, the receipt will be put into a .txt file, fuond in the same folder as the program.
+Hope you have fun and spend a crap ton of virtual money!
+- Developers of this 10/10 program
+*/
+
 #include "stdafx.h"
 #include <iostream>
 #include <string>
@@ -9,10 +18,12 @@
 
 using namespace std;
 
+// Function Parameters 
 void displayMenu();
 void displayReceipt(double &totalCost, float &tax);
 void printReceipt(double, double, double);
 
+// Global Variables and Arrays
 int i = 0;
 double itemPrice[15] = { 46.99, 4.99, 0.87, 17.79, 1.03, 13.99, 4.99, 14.99, 10.99, 29.99, 23.99, 25.99, 0.99, 99.99, 0.15 };
 string itemName[15] = { "Pizza", "Meal of Depression", "Turkey Burger", "Liberty Sandwich", "Veggie Burger", "Fountain of Freedom", "Alcohol", "Milk", "Lemonade", "Smoothie", "Icecream Nugget", "Oreo Pizza", "Icecream Cone", "Liberty Pie", "???" };
@@ -21,6 +32,7 @@ string orderName[30] = { "" };
 
 int main()
 {
+	// Main Function Variables
 	string HangmanChoice = "";
 	int itemNum;
 	float tax;
@@ -28,6 +40,7 @@ int main()
 	double totalCost = 0;
 	double tips;
 
+	// Beginning of Log File
 	ofstream logAction;
 
 	logAction.open("Program Log.txt", ios::app);
@@ -37,27 +50,31 @@ int main()
 	}
 
 		logAction << "----- Begin Log -----" << endl << endl;
-	displayMenu();
+
+	displayMenu(); // Display Menu
 		logAction << "Menu Load Successful" << endl;
 
 	cout << endl;
 	cout << "Welcome to WcDonalds, how may we help you?" << endl;
 
+	// Loop for ordering items
 	while (endLoop == false && i < 30) {
 
 		cout << endl << "Order (0 to stop): ";
 		cin >> itemNum;
 		logAction << "Order Item: # " << itemNum << endl;
 
+		// If statement to check if order is valid (Between 1 and 15) 
 		if (itemNum > 0 && itemNum <= 15) {
 
 			orderPrice[i] = itemPrice[itemNum - 1]; //Wyatt's Code
-			orderName[i] = itemName[itemNum - 1];
+			orderName[i] = itemName[itemNum - 1]; // Takes the price and name of the ordered item, and stores them into 2 different arrays
 			logAction << "Name: " << orderName[i] << "| Price: " << orderPrice[i] << endl;
 
 			totalCost = totalCost + itemPrice[itemNum - 1];
-			i++;
+			i++; // the variable i keeps track of the number of items ordered
 		}
+		// Order Everything
 		else if (itemNum == 100 && i == 0) {
 			while (i < 15) {
 				orderPrice[i] = itemPrice[i];
@@ -69,6 +86,7 @@ int main()
 			}
 			endLoop = true;
 		}
+		// The else if statement for finishing Orders
 		else if (itemNum == 0) {
 
 			if (i < 3) {
@@ -78,7 +96,6 @@ int main()
 			else {
 				endLoop = true;
 			}
-
 		}
 		else {
 			cout << endl;
@@ -88,9 +105,11 @@ int main()
 
 	}
 
+	// Calls DisplayReceipt function
 	displayReceipt(totalCost, tax);
 	logAction << "Display Receipt Successful" << endl;
 
+	// Tips and End of Program
 	cout << "Tips: $"; // Wyatt's Code
 	cin >> tips;
 	totalCost = totalCost + tips;
@@ -105,8 +124,11 @@ int main()
 	printReceipt(tax, tips, totalCost);
 	logAction << "Print Receipt Successful" << endl;
 	logAction << endl <<  "----- End Log -----" << endl << endl;
+
+	return 0;
 }
 
+// Menu Function
 void displayMenu() {
 	cout << " ===============================================================================================================" << endl;
 	cout << "|  Menu                                                                                                        |" << endl;
@@ -125,6 +147,7 @@ void displayMenu() {
 	cout << " ===============================================================================================================" << endl;
 }
 
+// DisplayReceipt Function, passes TotalCost and Tax by reference
 void displayReceipt(double &totalCost, float &tax) {
 
 	cout << endl << endl; // Orien's Code
@@ -132,6 +155,7 @@ void displayReceipt(double &totalCost, float &tax) {
 	cout << "Item Name                       Price" << endl;
 	cout << "-------------------------------------" << endl;
 
+	// loop to display the name and price of the ordered items
 	for (int l = 0; l < i; l++) {
 
 		cout << orderName[l] << endl;
@@ -139,6 +163,7 @@ void displayReceipt(double &totalCost, float &tax) {
 
 	}
 
+	// Calculates the tax (12%) 
 	tax = totalCost * 0.12;
 	totalCost = totalCost + tax;
 
@@ -150,8 +175,10 @@ void displayReceipt(double &totalCost, float &tax) {
 	cout << "                                " << totalCost << endl;
 }
 
+// Print Receipt Function
 void printReceipt(double tax, double tips, double totalCost) {
 
+	// Creates outfile and opens .txt file
 	ofstream receipt; //Akash's Code
 
 	receipt.open("receipt.txt", ios::out);
@@ -162,10 +189,12 @@ void printReceipt(double tax, double tips, double totalCost) {
 		receipt << "~~~ Thank You! Come Again! ~~~" << endl;
 		receipt << "------------------------------" << endl;
 
+		// loop to output order name and price to the file
  		for (int l = 0; l < i; l++) {
 			receipt << orderName[l] << endl;
 			receipt << "\t \t \t" << orderPrice[l] << endl;
 		}
+		// outputs tax, tips and total to the file
 		receipt << endl;
 		receipt << fixed << setprecision(2);
 		receipt << "Tax" << "\t \t \t" << tax << endl;
@@ -181,4 +210,3 @@ void printReceipt(double tax, double tips, double totalCost) {
 	}
 
 }
-
